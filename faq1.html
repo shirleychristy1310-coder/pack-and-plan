@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pack and Plan - FAQ</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    :root {
+      --primary: #F4B400;
+      --secondary: #FF8C42;
+      --accent: #FFF3B0;
+      --bg: #FFFAF0;
+      --text: #2F2F2F;
+      --radius: 16px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-space {
+      width: 65px;
+      height: 65px;
+    }
+
+    .logo-space img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #dbe9f5;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      padding: 3rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 2.5rem;
+      font-size: 2rem;
+    }
+
+    /* FAQ STYLES */
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+
+    .accordion-button {
+      background-color: var(--accent);
+      color: var(--text);
+      font-weight: 600;
+      border-radius: var(--radius);
+      transition: background-color 0.3s;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background-color: var(--secondary);
+      color: white;
+    }
+
+    .accordion-body {
+      background: var(--bg);
+      color: var(--text);
+      border-radius: var(--radius);
+    }
+
+    /* CONTACT SECTION */
+    .contact-info {
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      color: white;
+      border-radius: var(--radius);
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .contact-info h3 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 3rem;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo-space">
+        <img src="logo1.jpeg" alt="Pack and Plan Logo">
+      </div>
+      <div>
+        <h1>Pack and Plan</h1>
+        <p>Pack Light, Plan Right</p>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard_before.html">Destinations</a></li>
+        <li><a href="dashboard_before.html">Packages</a></li>
+        <li><a href="dashboard_before.html">Dash-Board</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+
+    <div class="faq-container">
+      <div class="accordion" id="faqAccordion">
+
+        <div class="accordion-item mb-3">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+              What is Pack and Plan?
+            </button>
+          </h2>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Pack and Plan is your travel companion that helps you discover destinations, plan your itinerary, and enjoy a hassle-free trip with curated travel packages.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item mb-3">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+              How can I book a travel package?
+            </button>
+          </h2>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              You can explore available packages on our website, select one that fits your preferences, and contact our team through the contact page for assistance with booking.
+            </div>
+          </div>
+        </div>
+
+        
+
+        <div class="accordion-item mb-3">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+              What payment options are available?
+            </button>
+          </h2>
+          <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              We accept all major credit and debit cards, net banking, and UPI payments. Secure online transactions ensure your booking is safe and easy.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item mb-3">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+              How can I contact customer support?
+            </button>
+          </h2>
+          <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              You can contact our support team anytime via the contact page or by emailing us at packandplan@gmail.com. We are available 24/7 to assist you.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-info">
+      <h3>Need More Help?</h3>
+      <p>Reach out to our support team for personalized assistance.</p>
+      <a href="contact-us.html" class="btn btn-light fw-bold">Contact Us</a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Pack and Plan | Explore. Experience. Enjoy.
+  </footer>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

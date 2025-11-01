@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pack and Plan - Majestic Mountains</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    :root {
+      --primary: #F4B400;
+      --secondary: #FF8C42;
+      --accent: #FFF3B0;
+      --bg: #FFFAF0;
+      --text: #2F2F2F;
+      --radius: 16px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-space {
+      width: 65px;
+      height: 65px;
+    }
+
+    .logo-space img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #dbe9f5;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary);
+    }
+
+    /* MAIN */
+    main {
+      padding: 3rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary);
+      font-size: 2rem;
+    }
+
+    .card {
+      border: none;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      height: 230px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      text-align: center;
+      background-color: white;
+    }
+
+    .btn-view {
+      background: var(--accent);
+      color: var(--text);
+      font-weight: 600;
+      border-radius: var(--radius);
+      padding: 0.6rem 1.2rem;
+      margin-top: 0.5rem;
+      transition: 0.3s;
+      border: none;
+      text-decoration: none;
+
+    }
+
+    .btn-view:hover {
+      background: var(--secondary);
+      color: white;
+    }
+
+    footer {
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 3rem;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo-space">
+        <img src="logo1.jpeg" alt="Pack and Plan Logo">
+      </div>
+      <div>
+        <h1>Pack and Plan</h1>
+        <p>Pack Light, Plan Right</p>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="destination.html">Destinations</a></li>
+        <li><a href="package.html">Packages</a></li>
+        <li><a href="dashboard_after.html">Dash-Board</a></li>
+        <li><a href="index.html">log-out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <h2 class="section-title">Majestic Mountains of India</h2>
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Kangchenjunga -->
+        <div class="col-md-4">
+          <div class="card">
+            <img src="m-1.jpg" alt="Kangchenjunga">
+            <div class="card-body">
+              <h5 class="card-title">Kangchenjunga - Sikkim</h5>
+              <p class="card-text">The third highest mountain in the world and a sacred peak in Sikkim.</p>
+              <a href="m-1.html" class="btn-view">View</a>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Nanda Devi -->
+        <div class="col-md-4">
+          <div class="card">
+            <img src="m-2.jpg" alt="Nanda Devi">
+            <div class="card-body">
+              <h5 class="card-title">Nanda Devi - Uttarakhand</h5>
+              <p class="card-text">The second highest peak in India, located in the Garhwal Himalayas.</p>
+              <a href="m-2.html" class="btn-view">View</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mount Kamet -->
+        <div class="col-md-4">
+          <div class="card">
+            <img src="m-3.jpg" alt="Mount Kamet">
+            <div class="card-body">
+              <h5 class="card-title">Mount Kamet - Uttarakhand</h5>
+              <p class="card-text">The third highest mountain in India, known for its majestic ice slopes.</p>
+              <a href="m-3.html" class="btn-view">View</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saltoro Kangri -->
+        <div class="col-md-4">
+          <div class="card">
+            <img src="m-4.jpg" alt="Saltoro Kangri">
+            <div class="card-body">
+              <h5 class="card-title">Saltoro Kangri - Ladakh</h5>
+              <p class="card-text">The highest peak in the Saltoro range of the Karakoram mountains.</p>
+              <a href="m-4.html" class="btn-view">View</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saser Kangri -->
+        <div class="col-md-4">
+          <div class="card">
+            <img src="m-5.jpg" alt="Saser Kangri">
+            <div class="card-body">
+              <h5 class="card-title">Saser Kangri - Ladakh</h5>
+              <p class="card-text">Located in the eastern Karakoram range, known for its rugged terrain.</p>
+              <a href="m-5.html" class="btn-view">View</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doddabetta -->
+        <div class="col-md-4">
+          <div class="card">
+            <img src="m-6.jpg" alt="Doddabetta">
+            <div class="card-body">
+              <h5 class="card-title">Doddabetta - Tamil Nadu</h5>
+              <p class="card-text">The highest peak in the Nilgiri Hills, offering panoramic views of Ooty.</p>
+              <a href="m-6.html" class="btn-view">View</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Pack and Plan | Explore. Experience. Enjoy.
+  </footer>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pack and Plan - Contact Us</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    :root {
+      --primary: #F4B400;
+      --secondary: #FF8C42;
+      --accent: #FFF3B0;
+      --bg: #FFFAF0;
+      --text: #2F2F2F;
+      --radius: 16px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-space {
+      width: 65px;
+      height: 65px;
+    }
+
+    .logo-space img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #dbe9f5;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary);
+    }
+
+    /* CONTACT SECTION */
+    main {
+      padding: 3rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary);
+      font-size: 2rem;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .contact-info {
+      flex: 1 1 320px;
+      background: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+
+    .contact-info h4 {
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .info-item {
+      margin-bottom: 1.2rem;
+    }
+
+    .info-item p {
+      margin: 0.2rem 0;
+    }
+
+    .contact-form {
+      flex: 1 1 420px;
+      background: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+
+    .form-control {
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      border: 1px solid var(--secondary);
+      padding: 0.8rem;
+      transition: 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 5px rgba(244, 180, 0, 0.4);
+    }
+
+    .btn-submit {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.8rem 1.6rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary);
+      color: var(--text);
+    }
+
+    /* MAP SECTION */
+    .map {
+      width: 100%;
+      height: 350px;
+      border-radius: var(--radius);
+      margin-top: 3rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    footer {
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 3rem;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo-space">
+        <img src="logo1.jpeg" alt="Pack and Plan Logo">
+      </div>
+      <div>
+        <h1>Pack and Plan</h1>
+        <p>Pack Light, Plan Right</p>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="destination.html">Destinations</a></li>
+        <li><a href="package.html">Packages</a></li>
+        <li><a href="dashboard_after.html">Dash-Board</a></li>
+        <li><a href="index.html">log-out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <h2 class="section-title">Get in Touch With Us</h2>
+
+    <div class="contact-container">
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h4>Contact Information</h4>
+        <div class="info-item">
+          <h6>Address</h6>
+          <p>123 Explorer Avenue, Chennai, Tamil Nadu, India</p>
+        </div>
+        <div class="info-item">
+          <h6>Phone</h6>
+          <p>+91 98765 43210</p>
+        </div>
+        <div class="info-item">
+          <h6>Email</h6>
+          <p>packandplan@gmail.com</p>
+        </div>
+        <div class="info-item">
+          <h6>Working Hours</h6>
+          <p>Mon - Sat: 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h4>Send Us a Message</h4>
+        <form>
+          <input type="text" class="form-control" placeholder="Your Name" required>
+          <input type="email" class="form-control" placeholder="Your Email" required>
+          <input type="text" class="form-control" placeholder="Subject">
+          <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map">
+      <iframe src="https://www.google.com/maps?q=Chennai,+India&output=embed"></iframe>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Pack and Plan | Explore. Experience. Enjoy.
+  </footer>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

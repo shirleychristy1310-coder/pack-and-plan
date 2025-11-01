@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pack and Plan - About Us</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    :root {
+      --primary: #F4B400;
+      --secondary: #FF8C42;
+      --accent: #FFF3B0;
+      --bg: #FFFAF0;
+      --text: #2F2F2F;
+      --radius: 16px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-space {
+      width: 65px;
+      height: 65px;
+    }
+
+    .logo-space img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #dbe9f5;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary);
+    }
+
+    /* ABOUT SECTION */
+    .about-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text h2 {
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      line-height: 1.8;
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+
+    .about-img {
+      flex: 1;
+    }
+
+    .about-img img {
+      width: 100%;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+
+    /* MISSION & VISION */
+    .mission-vision {
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .mission-vision h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .mission-vision .row {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .mv-card {
+      background: white;
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 2rem;
+      width: 300px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .mv-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .mv-card h4 {
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    /* TEAM SECTION */
+    .team-section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .team-section h3 {
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .team-member {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .team-member:hover {
+      transform: scale(1.05);
+    }
+
+    .team-member img {
+      width: 100%;
+      border-radius: var(--radius);
+      height: 230px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .team-member h5 {
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .team-member p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* CONTACT CTA */
+    .contact-cta {
+      text-align: center;
+      background: var(--accent);
+      padding: 3rem 2rem;
+      border-radius: var(--radius);
+      margin: 4rem auto;
+      width: 90%;
+    }
+
+    .contact-cta h4 {
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .contact-cta a {
+      background: var(--secondary);
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .contact-cta a:hover {
+      background: var(--primary);
+      color: var(--text);
+    }
+
+    footer {
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 2rem;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo-space">
+        <img src="logo1.jpeg" alt="Pack and Plan Logo">
+      </div>
+      <div>
+        <h1>Pack and Plan</h1>
+        <p>Pack Light, Plan Right</p>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="destination.html">Destinations</a></li>
+        <li><a href="package.html">Packages</a></li>
+        <li><a href="dashboard_after.html">Dash-Board</a></li>
+        <li><a href="index.html">log-out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section">
+    <div class="about-text">
+      <h2>About Pack and Plan</h2>
+      <p>Welcome to Pack and Plan - your trusted travel companion dedicated to making every journey unforgettable. We specialize in crafting personalized travel experiences, whether you're seeking serene beaches, majestic mountains, or vibrant cities.</p>
+      <p>Founded by a team of passionate explorers, our goal is to simplify your travel planning and inspire a spirit of adventure. We believe that every trip should be about discovery, comfort, and creating memories that last a lifetime.</p>
+    </div>
+    <div class="about-img">
+      <img src="about.jpg" alt="About Pack and Plan">
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="mission-vision">
+    <h3>Our Mission & Vision</h3>
+    <div class="row justify-content-center">
+      <div class="mv-card">
+        <h4>Our Mission</h4>
+        <p>To inspire travelers by offering well-planned, affordable, and sustainable journeys that celebrate culture, nature, and connection.</p>
+      </div>
+      <div class="mv-card">
+        <h4>Our Vision</h4>
+        <p>To become the most trusted travel platform known for creativity, transparency, and the joy of meaningful exploration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section class="team-section">
+    <h3>Meet Our Team</h3>
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-3">
+          <div class="team-member">
+            <img src="about3.jpg" alt="Team Member">
+            <h5>Riya Sharma</h5>
+            <p>Founder & CEO</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="team-member">
+            <img src="about1.jpg" alt="Team Member">
+            <h5>Arjun Mehta</h5>
+            <p>Travel Strategist</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="team-member">
+            <img src="about4.jpg" alt="Team Member">
+            <h5>Neha Patel</h5>
+            <p>Creative Designer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section class="contact-cta">
+    <h4>Ready to start your next adventure?</h4>
+    <a href="contact.html">Get in Touch</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Pack and Plan | Explore. Experience. Enjoy.
+  </footer>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

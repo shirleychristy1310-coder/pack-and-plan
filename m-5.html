@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pack and Plan - Kangchenjunga mountain</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    :root {
+      --primary: #F4B400;   /* Rich Golden Yellow */
+      --secondary: #FF8C42; /* Sunset Orange */
+      --accent: #FFF3B0;    /* Soft Cream Yellow */
+      --bg: #FFFAF0;        /* Light Ivory */
+      --text: #2F2F2F;      /* Charcoal Gray */
+      --radius: 16px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-space {
+      width: 65px;
+      height: 65px;
+    }
+
+    .logo-space img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #dbe9f5;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary);
+    }
+
+    /* MAIN SECTION SPLIT */
+    .content-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      height: calc(100vh - 100px);
+      overflow: hidden;
+    }
+
+    .left-side {
+      flex: 1;
+      background: url('m-5.jpg') no-repeat center center/cover;
+    }
+
+    .right-side {
+      flex: 1;
+      background-color: #fff7e6;
+      padding: 2rem;
+      overflow-y: auto;
+      box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .right-side h2 {
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .right-side h3 {
+      color: var(--primary);
+      font-weight: 600;
+      margin-top: 2rem;
+    }
+
+    .right-side p {
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .review-box {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-top: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .review-box h4 {
+      margin: 0 0 0.5rem;
+      color: var(--secondary);
+    }
+
+    footer {
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      border-radius: var(--radius) var(--radius) 0 0;
+      margin-top: 0;
+    }
+
+    /* Scrollbar styling */
+    .right-side::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .right-side::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    .right-side::-webkit-scrollbar-track {
+      background: #fff0d6;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo-space">
+        <img src="logo1.jpeg" alt="Pack and Plan Logo">
+      </div>
+      <div>
+        <h1>Pack and Plan</h1>
+        <p>Pack Light, Plan Right</p>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="destination.html">Destinations</a></li>
+        <li><a href="package.html">Packages</a></li>
+        <li><a href="dashboard_after.html">Dash-Board</a></li>
+        <li><a href="index.html">log-out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT SPLIT -->
+  <div class="content-wrapper">
+    <!-- LEFT IMAGE SIDE -->
+    <div class="left-side"></div>
+
+    <!-- RIGHT CONTENT SIDE -->
+    <div class="right-side">
+      <h2>Saser Kangri ,Ladakh</h2>
+      <p>Standing 7,672 m tall, Saser Kangri guards the Nubra Valley with icy majesty. Its peaks shimmer like glass under the sun — a true wilderness where time seems to pause.</p>
+      <h3>Things to Do</h3>
+      <p>Drive through Khardung La Pass, explore Turtuk Village, visit Sumur Monastery, and camp beneath starlit skies. </p>
+      <h3>Best Time to Visit</h3>
+      <p>May to September, when the passes open and valleys bloom..</p>
+      <h3>Reviews</h3>
+
+      <div class="review-box">
+        <h4>Ishita V.</h4>
+        <p>Camping under Saser Kangri’s shadow was unreal — silence never felt so alive.</p>
+      </div>
+
+      <div class="review-box">
+        <h4>Karan P</h4>
+        <p>Every corner looked like a painting carved by ice.</p>
+      </div>
+
+      <div class="review-box">
+        <h4>Arushi S</h4>
+        <p>It’s untouched, wild, and humbling — a dream for the soul.</p>
+      </div>
+
+      <div class="review-box">
+        <h4>Deepak R.</h4>
+        <p>The night sky here makes you forget the world below</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Pack and Plan | Explore. Experience. Enjoy.
+  </footer>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

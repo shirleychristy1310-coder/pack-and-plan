@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pack and Plan - Packages</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    :root{
+      --primary: #F4B400;
+      --secondary: #FF8C42;
+      --accent: #FFF3B0;
+      --bg: #FFFAF0;
+      --text: #2F2F2F;
+      --radius: 14px;
+      --card-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: 'Poppins', sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* header / footer (same as site) */
+    header{
+      background:var(--primary);
+      color:#fff;
+      padding:1rem 2rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:100;
+      box-shadow:0 3px 10px rgba(0,0,0,0.2);
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo-space{width:56px;height:56px}
+    .logo-space img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+    header h1{margin:0;font-size:1.5rem;color:var(--accent);font-weight:700}
+    header p{margin:0;font-size:0.9rem;color:#f1f7ff}
+    nav ul{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
+    nav a{color:white;text-decoration:none;font-weight:600}
+
+    /* page layout */
+    .page {
+      max-width:1100px;
+      margin:2.2rem auto;
+      padding:0 1rem;
+    }
+
+    .card {
+      background:white;
+      border-radius:var(--radius);
+      box-shadow:var(--card-shadow);
+      padding:1.25rem;
+      margin-bottom:1.25rem;
+    }
+
+    .steps {
+      display:flex;
+      gap:.5rem;
+      margin-bottom:1rem;
+      align-items:center;
+      justify-content:center;
+    }
+    .step {
+      padding:.45rem .8rem;
+      border-radius:999px;
+      background: #fff3d0;
+      color: var(--text);
+      font-weight:700;
+      box-shadow:0 3px 8px rgba(0,0,0,0.06);
+    }
+    .step.active { background: var(--secondary); color: #fff; }
+
+    /* slider container - FIXED: make slides fluid and each slide flex-basis 100% */
+    .slider {
+      position:relative;
+      overflow:hidden;
+      height:640px;
+      border-radius:var(--radius);
+    }
+    .slides {
+      display:flex;
+      width:100%; /* let flex children decide layout */
+      height:100%;
+      transition:transform .45s cubic-bezier(.2,.9,.3,1);
+    }
+    .slide {
+      flex: 0 0 100%; /* ensure each slide is exactly the viewport width */
+      padding:1.6rem;
+      overflow:auto;
+      height:100%;
+    }
+
+    /* Step specific styles */
+    .option-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+      gap:1rem;
+      margin-top:1rem;
+    }
+
+    .option-card {
+      background:var(--accent);
+      border-radius:12px;
+      padding:1rem;
+      cursor:pointer;
+      border:2px solid transparent;
+      transition:all .2s;
+      min-height:120px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .option-card:hover{transform:translateY(-6px)}
+    .option-card.selected{border-color:var(--secondary); box-shadow:0 10px 30px rgba(255,140,66,0.12)}
+
+    label.field {
+      display:block;
+      font-weight:600;
+      margin-bottom:.4rem;
+      color:var(--secondary);
+    }
+
+    select, input[type="number"], input[type="text"]{
+      width:100%;
+      padding:.6rem;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:white;
+      font-size:0.95rem;
+    }
+
+    .controls {
+      display:flex;
+      gap:.75rem;
+      justify-content:space-between;
+      margin-top:1.2rem;
+      align-items:center;
+    }
+
+    .controls .left {
+      font-size:0.95rem;
+      color:rgba(0,0,0,0.6);
+    }
+
+    .btn-primary {
+      background:var(--secondary);
+      border:none;
+      color:white;
+      padding:.6rem 1rem;
+      border-radius:12px;
+      font-weight:700;
+    }
+    .btn-secondary {
+      background:transparent;
+      border:1px solid rgba(0,0,0,0.08);
+      color:var(--text);
+      padding:.5rem .9rem;
+      border-radius:12px;
+      font-weight:600;
+    }
+
+    /* itinerary layout */
+    .itinerary {
+      display:flex;
+      flex-direction:column;
+      gap:.9rem;
+      margin-top:1rem;
+    }
+    .it-day {
+      padding:.9rem;
+      background:linear-gradient(180deg,#fff,#fff7e8);
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.04);
+    }
+    .small-muted { color:rgba(0,0,0,0.6); font-size:.9rem; }
+
+    .price-box {
+      margin-top:1rem;
+      padding:1rem;
+      border-radius:12px;
+      background:linear-gradient(90deg,#fff3d8,#fff);
+      box-shadow:0 6px 18px rgba(0,0,0,0.04);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+    }
+    .price-big { font-weight:800; font-size:1.5rem; color:var(--secondary) }
+
+    /* summary layout */
+    .summary-row {
+      display:flex;
+      justify-content:space-between;
+      padding:.6rem 0;
+      border-bottom:1px dashed rgba(0,0,0,0.06);
+      align-items:center;
+    }
+
+    .payment-options { display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.8rem }
+    .pay-mode {
+      padding:.6rem .9rem;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:white;
+      cursor:pointer;
+    }
+    .pay-mode.selected { border-color:var(--secondary); background: #fff7e6 }
+
+    /* responsive */
+    @media (max-width:840px){
+      .slider { height:820px }
+    }
+    @media (max-width:520px){
+      header h1{font-size:1.1rem}
+      .page { padding:0 0.8rem }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo-space"><img src="logo1.jpeg" alt="logo"></div>
+      <div>
+        <h1>Pack and Plan</h1>
+        <p>Pack Light, Plan Right</p>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="destination.html">Destinations</a></li>
+        <li><a href="package.html">Packages</a></li>
+        <li><a href="dashboard_after.html">Dash-Board</a></li>
+        <li><a href="index.html">log-out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="page">
+
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;">
+        <div>
+          <h2 style="margin:0;color:var(--secondary)">Choose Your Package</h2>
+          <p style="margin:.35rem 0 0;" class="small-muted">Select a theme, budget and destination to view curated itineraries</p>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700">Steps</div>
+          <div class="steps" aria-hidden="true">
+            <div class="step active" id="step-ind-1">1</div>
+            <div class="step" id="step-ind-2">2</div>
+            <div class="step" id="step-ind-3">3</div>
+            <div class="step" id="step-ind-4">4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slider card" aria-live="polite">
+      <div class="slides" id="slides">
+
+        <!-- SLIDE 1: selection -->
+        <div class="slide" id="slide-1">
+          <h4>1. Select Theme and Travel Filters</h4>
+
+          <div style="margin-top:1rem">
+            <label class="field">Theme</label>
+            <div class="option-grid" id="themeOptions">
+              <div class="option-card selected" data-value="Family" data-theme="Family">
+                <div style="font-weight:800">Family</div>
+                <div class="small-muted">Spacious stays, kid friendly activities, relaxed pace</div>
+              </div>
+              <div class="option-card" data-value="Budget" data-theme="Budget">
+                <div style="font-weight:800">Budget</div>
+                <div class="small-muted">Pocket friendly stays, local experiences, efficient itineraries</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap">
+            <div style="flex:1;min-width:210px">
+              <label class="field">Price Range (per person)</label>
+              <select id="priceRange">
+                <option value="low">Under 6000</option>
+                <option value="mid" selected>6000 - 15000</option>
+                <option value="high">15000 and above</option>
+              </select>
+            </div>
+
+            <div style="flex:1;min-width:210px">
+              <label class="field">Duration</label>
+              <select id="duration">
+                <option value="2">2 Days</option>
+                <option value="3" selected>3 Days</option>
+                <option value="4">4 Days</option>
+                <option value="5">5 Days</option>
+              </select>
+            </div>
+
+            <div style="flex:1;min-width:210px">
+              <label class="field">Location</label>
+              <select id="location">
+                <option value="Delhi">Delhi</option>
+                <option value="Bengaluru">Bengaluru</option>
+                <option value="Chennai" selected>Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="controls">
+            <div class="left small-muted">Tip: Family theme includes family-friendly rooms and activities.</div>
+            <div>
+              <button class="btn-secondary" id="resetBtn">Reset</button>
+              <button class="btn-primary" id="toStep2">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: Itinerary, inclusions, price and options -->
+        <div class="slide" id="slide-2">
+          <h4>2. Itinerary and Package Details</h4>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem">
+            <div style="flex:1;min-width:320px">
+              <div style="font-weight:700;color:var(--secondary)">Itinerary</div>
+              <div id="itineraryContainer" class="itinerary" aria-live="polite">
+                <!-- JS populates -->
+              </div>
+
+              <div style="margin-top:1rem">
+                <div style="font-weight:700;color:var(--secondary)">Inclusions</div>
+                <ul id="inclusionsList" style="margin-top:.5rem">
+                  <!-- JS populates -->
+                </ul>
+                <div style="font-weight:700;color:var(--secondary);margin-top:.6rem">Exclusions</div>
+                <ul id="exclusionsList" style="margin-top:.5rem">
+                  <!-- JS populates -->
+                </ul>
+              </div>
+            </div>
+
+            <div style="width:320px">
+              <div style="font-weight:700;color:var(--secondary)">Options</div>
+
+              <div style="margin-top:.6rem">
+                <label class="field">Stay Type</label>
+                <select id="stayOption">
+                  <!-- JS updates options -->
+                </select>
+              </div>
+
+              <div style="margin-top:.6rem">
+                <label class="field">Number of People</label>
+                <input id="peopleCount" type="number" min="1" max="10" value="2">
+              </div>
+
+              <div class="price-box" aria-live="polite">
+                <div>
+                  <div class="small-muted">Estimated total</div>
+                  <div class="price-big" id="calculatedPrice">INR 0</div>
+                  <div class="small-muted" style="font-size:.9rem">Price shown is an estimate; taxes included in final step.</div>
+                </div>
+              </div>
+
+              <div class="controls" style="margin-top:1rem">
+                <div><button class="btn-secondary" id="backTo1">Back</button></div>
+                <div>
+                  <button class="btn-primary" id="toStep3">Book Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: Summary and Make Payment -->
+        <div class="slide" id="slide-3">
+          <h4>3. Package Summary & Payment</h4>
+
+          <div style="display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:1rem">
+            <div style="flex:1;min-width:360px">
+              <div style="background:linear-gradient(180deg,#fff,#fff7e8);padding:1rem;border-radius:12px;box-shadow:var(--card-shadow)">
+                <h5 style="margin:0 0 .5rem 0;color:var(--secondary)">Package Summary</h5>
+
+                <div class="summary-row"><div>Theme</div><div id="sumTheme"></div></div>
+                <div class="summary-row"><div>Location</div><div id="sumLocation"></div></div>
+                <div class="summary-row"><div>Duration</div><div id="sumDuration"></div></div>
+                <div class="summary-row"><div>Stay Option</div><div id="sumStay"></div></div>
+                <div class="summary-row"><div>People</div><div id="sumPeople"></div></div>
+                <div class="summary-row"><div>Base Cost</div><div id="sumBaseCost"></div></div>
+                <div class="summary-row"><div>Taxes & Fees</div><div id="sumTaxes"></div></div>
+                <div class="summary-row" style="font-weight:800"><div>Total Payable</div><div id="sumTotal"></div></div>
+
+              </div>
+
+              <div style="margin-top:1rem;">
+                <h5 style="color:var(--secondary)">Notes</h5>
+                <ul>
+                  <li>Final payment confirms booking and sends e-ticket by email.</li>
+                  <li>Changes to number of people or stay may affect final price.</li>
+                  <li>Cancellation policy is shown on confirmation page after payment.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="width:340px">
+              <div class="card" style="padding:1rem">
+                <h5 style="margin:0 0 .6rem 0;color:var(--secondary)">Ready to Pay?</h5>
+                <div class="small-muted">Choose payment mode on next screen. You can go back to edit details.</div>
+
+                <div style="margin-top:1rem" class="controls">
+                  <div><button class="btn-secondary" id="backTo2">Back</button></div>
+                  <div><button class="btn-primary" id="toStep4">Make Payment</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SLIDE 4: Payment -->
+        <div class="slide" id="slide-4">
+          <h4>4. Payment</h4>
+
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem">
+            <div style="flex:1;min-width:360px">
+              <div style="background:linear-gradient(180deg,#fff,#fff7e8);padding:1rem;border-radius:12px;box-shadow:var(--card-shadow)">
+                <h5 style="margin:0 0 .6rem 0;color:var(--secondary)">Payment Details</h5>
+
+                <div class="summary-row"><div>Total Payable</div><div id="payTotal"></div></div>
+
+                <div style="margin-top:1rem">
+                  <label class="field">Select Payment Mode</label>
+                  <div class="payment-options" id="paymentModes">
+                    <div class="pay-mode selected" data-mode="Credit Card">Credit Card</div>
+                    <div class="pay-mode" data-mode="Debit Card">Debit Card</div>
+                    <div class="pay-mode" data-mode="UPI">UPI</div>
+                    <div class="pay-mode" data-mode="Netbanking">Netbanking</div>
+                    <div class="pay-mode" data-mode="Wallet">Wallet</div>
+                  </div>
+                </div>
+
+                <div style="margin-top:1rem">
+                  <label class="field">Name on Card / UPI</label>
+                  <input type="text" id="payName" placeholder="Enter name">
+                </div>
+
+                <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+                  <div style="flex:1;min-width:140px">
+                    <label class="field">Phone</label>
+                    <input type="text" id="payPhone" placeholder="Enter phone">
+                  </div>
+                  <div style="flex:1;min-width:140px">
+                    <label class="field">Email</label>
+                    <input type="text" id="payEmail" placeholder="Enter email">
+                  </div>
+                </div>
+
+                <div class="controls" style="margin-top:1rem">
+                  <div><button class="btn-secondary" id="backTo3">Back</button></div>
+                  <div><button class="btn-primary" id="confirmPay">Confirm Payment</button></div>
+                </div>
+
+              </div>
+            </div>
+
+            <div style="width:320px">
+              <div class="card" style="padding:1rem">
+                <h5 style="margin:0 0 .6rem 0;color:var(--secondary)">Booking Overview</h5>
+                <div class="small-muted">Review your booking before payment.</div>
+
+                <div style="margin-top:1rem">
+                  <div class="summary-row"><div>Location</div><div id="ovLocation"></div></div>
+                  <div class="summary-row"><div>Duration</div><div id="ovDuration"></div></div>
+                  <div class="summary-row"><div>People</div><div id="ovPeople"></div></div>
+                  <div class="summary-row"><div>Stay</div><div id="ovStay"></div></div>
+                  <div class="summary-row" style="font-weight:800"><div>Amount</div><div id="ovAmount"></div></div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div> <!-- slides -->
+    </div> <!-- slider -->
+
+  </div> <!-- page -->
+
+  <!-- FOOTER -->
+  <footer style="background:var(--secondary);color:#fff;text-align:center;padding:1.2rem;border-radius:12px 12px 0 0;margin-top:2rem">
+    &copy; 2025 Pack and Plan | Explore. Experience. Enjoy.
+  </footer>
+
+<script>
+  // Data definitions: itineraries and base pricing (per person per day base)
+  const cityData = {
+    "Delhi": {
+      basePerDay: { Family: 2500, Budget: 1200 },
+      itineraries: {
+        2: [
+          { day: "Day 1", desc: "Red Fort, Jama Masjid, Old Delhi walk and street food." },
+          { day: "Day 2", desc: "India Gate, Rajpath, Qutub Minar, local market visit." }
+        ],
+        3: [
+          { day: "Day 1", desc: "Humayun Tomb, Lodhi Garden and Connaught Place." },
+          { day: "Day 2", desc: "Red Fort, Chandni Chowk culinary walk." },
+          { day: "Day 3", desc: "Qutub Minar, Hauz Khas Village, sunset at India Gate." }
+        ],
+        4: [
+          { day: "Day 1", desc: "Museum tour and Connaught Place." },
+          { day: "Day 2", desc: "Old Delhi and spice market experience." },
+          { day: "Day 3", desc: "Day trip to Sultanpur Bird Sanctuary." },
+          { day: "Day 4", desc: "Leisure day and rooftop dining." }
+        ],
+        5: [
+          { day: "Day 1", desc: "Heritage walk and museum visit." },
+          { day: "Day 2", desc: "Old Delhi exploration." },
+          { day: "Day 3", desc: "Day trip to Agra optional (extra cost)." },
+          { day: "Day 4", desc: "Market shopping and culinary tour." },
+          { day: "Day 5", desc: "Relax and local arts craft shopping." }
+        ]
+      },
+      inclusions: ["2 nights hotel stay (Family) or 2 nights budget guesthouse (Budget) as per selection", "Daily breakfast", "Local transfers (AC car for sightseeing)"],
+      exclusions: ["Airfare or train fare", "Optional entrance fees and Agra day trip", "Personal expenses"]
+    },
+
+    "Bengaluru": {
+      basePerDay: { Family: 2200, Budget: 1000 },
+      itineraries: {
+        2: [
+          { day: "Day 1", desc: "Cubbon Park, Vidhana Soudha, and MG Road stroll." },
+          { day: "Day 2", desc: "Lalbagh Botanical Garden and local craft markets." }
+        ],
+        3: [
+          { day: "Day 1", desc: "Lalbagh, Tipu Sultan's Summer Palace." },
+          { day: "Day 2", desc: "ITPL area and Bangalore Palace visit." },
+          { day: "Day 3", desc: "Nandi Hills day trip early morning." }
+        ],
+        4: [
+          { day: "Day 1", desc: "City museums and food tour." },
+          { day: "Day 2", desc: "Day trip to Mysore optional." },
+          { day: "Day 3", desc: "Gardens and local markets." },
+          { day: "Day 4", desc: "Cafe hopping and evening events." }
+        ],
+        5: [
+          { day: "Day 1", desc: "Explore art spaces and gardens." },
+          { day: "Day 2", desc: "Eco trail and craft market visit." },
+          { day: "Day 3", desc: "Mysore day trip optional." },
+          { day: "Day 4", desc: "Local villages and heritage spots." },
+          { day: "Day 5", desc: "Relax and free time." }
+        ]
+      },
+      inclusions: ["Hotel stay as per selection", "Daily breakfast", "One local guided tour"],
+      exclusions: ["Transport to city", "Optional trips and entrance fees", "Meals not listed"]
+    },
+
+    "Chennai": {
+      basePerDay: { Family: 2000, Budget: 900 },
+      itineraries: {
+        2: [
+          { day: "Day 1", desc: "Marina Beach sunrise and Fort St. George." },
+          { day: "Day 2", desc: "Kapaleeswarar Temple and local cultural show." }
+        ],
+        3: [
+          { day: "Day 1", desc: "Marina Beach and lighthouse visit." },
+          { day: "Day 2", desc: "Mahabalipuram day trip." },
+          { day: "Day 3", desc: "Local food tour and shopping." }
+        ],
+        4: [
+          { day: "Day 1", desc: "Heritage walk and museum." },
+          { day: "Day 2", desc: "Mahabalipuram and shore temples." },
+          { day: "Day 3", desc: "Kanchipuram silk tour optional." },
+          { day: "Day 4", desc: "Relax and local market visit." }
+        ],
+        5: [
+          { day: "Day 1", desc: "Coastal drive and local sites." },
+          { day: "Day 2", desc: "Mahabalipuram and craft visits." },
+          { day: "Day 3", desc: "Kanchipuram optional tour." },
+          { day: "Day 4", desc: "Temple tours and food." },
+          { day: "Day 5", desc: "Leisure day." }
+        ]
+      },
+      inclusions: ["Hotel stay", "Breakfast", "Transfers for listed sightseeing"],
+      exclusions: ["Flights", "Special entry fees", "Meals beyond breakfast"]
+    },
+
+    "Hyderabad": {
+      basePerDay: { Family: 2300, Budget: 1100 },
+      itineraries: {
+        2: [
+          { day: "Day 1", desc: "Charminar, Laad Bazaar and local culinary walk." },
+          { day: "Day 2", desc: "Golconda Fort and Qutb Shahi tombs." }
+        ],
+        3: [
+          { day: "Day 1", desc: "City heritage and markets." },
+          { day: "Day 2", desc: "Golconda Fort and museums." },
+          { day: "Day 3", desc: "Ramoji Film City optional or local crafts." }
+        ],
+        4: [
+          { day: "Day 1", desc: "Heritage tour and local market." },
+          { day: "Day 2", desc: "Golconda and museums." },
+          { day: "Day 3", desc: "Ramoji Film City or nearby day trip." },
+          { day: "Day 4", desc: "Leisure and food tasting." }
+        ],
+        5: [
+          { day: "Day 1", desc: "Heritage walk and local experiences." },
+          { day: "Day 2", desc: "Fort visits." },
+          { day: "Day 3", desc: "Film city or day trip." },
+          { day: "Day 4", desc: "Local craft visits." },
+          { day: "Day 5", desc: "Relax day." }
+        ]
+      },
+      inclusions: ["Hotel stay", "Breakfast", "Local transfers"],
+      exclusions: ["Flight/train", "Optional extras", "Meals not mentioned"]
+    },
+
+    "Pune": {
+      basePerDay: { Family: 1900, Budget: 900 },
+      itineraries: {
+        2: [
+          { day: "Day 1", desc: "Shaniwar Wada, Dagdusheth Temple and local walks." },
+          { day: "Day 2", desc: "Aga Khan Palace and Osho Ashram area." }
+        ],
+        3: [
+          { day: "Day 1", desc: "Heritage sights and markets." },
+          { day: "Day 2", desc: "Lonavala day trip option." },
+          { day: "Day 3", desc: "Local museum and cafe tour." }
+        ],
+        4: [
+          { day: "Day 1", desc: "Heritage and food tour." },
+          { day: "Day 2", desc: "Lonavala and Khandala day trip." },
+          { day: "Day 3", desc: "Local villages and markets." },
+          { day: "Day 4", desc: "Relax and cafe stroll." }
+        ],
+        5: [
+          { day: "Day 1", desc: "City heritage." },
+          { day: "Day 2", desc: "Lonavala trip." },
+          { day: "Day 3", desc: "Local craft and museum visits." },
+          { day: "Day 4", desc: "Village experience." },
+          { day: "Day 5", desc: "Leisure." }
+        ]
+      },
+      inclusions: ["Stay", "Breakfast", "One guided tour"],
+      exclusions: ["Transport to Pune", "Optional trips", "Meals beyond breakfast"]
+    }
+  };
+
+  // Stay options adjustments (multiplier on base price)
+  const stayOptions = {
+    "Standard": 1.0,
+    "Comfort": 1.35,
+    "Premium": 1.75
+  };
+
+  // Initial UI references and state
+  const slidesEl = document.getElementById('slides');
+  const stepInd = [document.getElementById('step-ind-1'),document.getElementById('step-ind-2'),document.getElementById('step-ind-3'),document.getElementById('step-ind-4')];
+  let currentStep = 0;
+
+  const themeOptionsEl = document.getElementById('themeOptions');
+  const priceRangeEl = document.getElementById('priceRange');
+  const durationEl = document.getElementById('duration');
+  const locationEl = document.getElementById('location');
+
+  const itineraryContainer = document.getElementById('itineraryContainer');
+  const inclusionsList = document.getElementById('inclusionsList');
+  const exclusionsList = document.getElementById('exclusionsList');
+  const stayOptionEl = document.getElementById('stayOption');
+  const peopleCountEl = document.getElementById('peopleCount');
+  const calculatedPriceEl = document.getElementById('calculatedPrice');
+
+  const toStep2Btn = document.getElementById('toStep2');
+  const toStep3Btn = document.getElementById('toStep3');
+  const toStep4Btn = document.getElementById('toStep4');
+
+  const backTo1Btn = document.getElementById('backTo1');
+  const backTo2Btn = document.getElementById('backTo2');
+  const backTo3Btn = document.getElementById('backTo3');
+
+  const sumTheme = document.getElementById('sumTheme');
+  const sumLocation = document.getElementById('sumLocation');
+  const sumDuration = document.getElementById('sumDuration');
+  const sumStay = document.getElementById('sumStay');
+  const sumPeople = document.getElementById('sumPeople');
+  const sumBaseCost = document.getElementById('sumBaseCost');
+  const sumTaxes = document.getElementById('sumTaxes');
+  const sumTotal = document.getElementById('sumTotal');
+
+  const payTotal = document.getElementById('payTotal');
+  const ovLocation = document.getElementById('ovLocation');
+  const ovDuration = document.getElementById('ovDuration');
+  const ovPeople = document.getElementById('ovPeople');
+  const ovStay = document.getElementById('ovStay');
+  const ovAmount = document.getElementById('ovAmount');
+
+  const paymentModesEl = document.getElementById('paymentModes');
+  const payNameEl = document.getElementById('payName');
+  const payPhoneEl = document.getElementById('payPhone');
+  const payEmailEl = document.getElementById('payEmail');
+  const confirmPayBtn = document.getElementById('confirmPay');
+
+  // state
+  const state = {
+    theme: 'Family',
+    priceRange: priceRangeEl.value,
+    duration: parseInt(durationEl.value),
+    location: locationEl.value,
+    stay: 'Standard',
+    people: parseInt(peopleCountEl.value),
+    payMode: 'Credit Card'
+  };
+
+  // helper: update slider transform
+  function goToStep(index){
+    currentStep = index;
+    slidesEl.style.transform = `translateX(-${index * 100}%)`;
+    stepInd.forEach((el,i)=> el.classList.toggle('active', i===index));
+    // focus first input in step (accessibility)
+    if(index===0) themeOptionsEl.querySelector('.option-card')?.focus();
+    // if content height changes, ensure slider scrolls to top of that slide
+    const activeSlide = slidesEl.children[index];
+    if(activeSlide) activeSlide.scrollTop = 0;
+  }
+
+  // initialize theme option click behavior
+  themeOptionsEl.querySelectorAll('.option-card').forEach(card=>{
+    card.addEventListener('click', () => {
+      themeOptionsEl.querySelectorAll('.option-card').forEach(c=> c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.theme = card.dataset.value;
+      // adjust priceRange default maybe
+    });
+  });
+
+  // reset button
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    // reset fields
+    state.theme = 'Family';
+    state.priceRange = 'mid';
+    state.duration = 3;
+    state.location = 'Chennai';
+    themeOptionsEl.querySelectorAll('.option-card').forEach(c => c.classList.toggle('selected', c.dataset.value===state.theme));
+    priceRangeEl.value = state.priceRange;
+    durationEl.value = state.duration;
+    locationEl.value = state.location;
+    populateStayOptions();
+    renderItinerary();
+    recalcPrice();
+    goToStep(0);
+  });
+
+  // update state on select changes
+  priceRangeEl.addEventListener('change', () => state.priceRange = priceRangeEl.value);
+  durationEl.addEventListener('change', () => {
+    state.duration = parseInt(durationEl.value);
+    renderItinerary();
+    recalcPrice();
+  });
+  locationEl.addEventListener('change', () => {
+    state.location = locationEl.value;
+    renderItinerary();
+    populateStayOptions();
+    recalcPrice();
+  });
+
+  // populate stay options based on theme and price range
+  function populateStayOptions(){
+    // For family theme provide Comfort and Premium emphasis
+    stayOptionEl.innerHTML = '';
+    const opts = ["Standard","Comfort","Premium"];
+    opts.forEach(o=>{
+      const el = document.createElement('option');
+      el.value = o;
+      el.textContent = `${o} - ${o==='Standard'?'Budget': o==='Comfort'?'Comfortable':'Premium stay'}`;
+      stayOptionEl.appendChild(el);
+    });
+    // choose default based on theme
+    stayOptionEl.value = state.theme==='Family' ? 'Comfort' : 'Standard';
+    state.stay = stayOptionEl.value;
+  }
+
+  stayOptionEl.addEventListener('change', () => {
+    state.stay = stayOptionEl.value;
+    recalcPrice();
+  });
+
+  peopleCountEl.addEventListener('change', () => {
+    const v = parseInt(peopleCountEl.value) || 1;
+    state.people = Math.max(1, Math.min(10, v));
+    peopleCountEl.value = state.people;
+    recalcPrice();
+  });
+
+  // render itinerary for selected city and duration
+  function renderItinerary(){
+    const city = cityData[state.location];
+    const days = state.duration;
+    const itin = city?.itineraries[days] || [];
+    itineraryContainer.innerHTML = '';
+    itin.forEach(item=>{
+      const div = document.createElement('div');
+      div.className = 'it-day';
+      div.innerHTML = `<strong>${item.day}</strong><div class="small-muted">${item.desc}</div>`;
+      itineraryContainer.appendChild(div);
+    });
+
+    inclusionsList.innerHTML = '';
+    (city.inclusions || []).forEach(i=>{
+      const li = document.createElement('li'); li.textContent = i; inclusionsList.appendChild(li);
+    });
+
+    exclusionsList.innerHTML = '';
+    (city.exclusions || []).forEach(i=>{
+      const li = document.createElement('li'); li.textContent = i; exclusionsList.appendChild(li);
+    });
+  }
+
+  // price calculation: basePerDay * duration * people * stayMultiplier
+  function recalcPrice(){
+    const city = cityData[state.location];
+    const basePerDay = city.basePerDay[state.theme] || 1000;
+    const stayMult = stayOptions[state.stay] || 1.0;
+    // price adjustments based on priceRange
+    let rangeMult = 1.0;
+    if(state.priceRange === 'low') rangeMult = 0.8;
+    if(state.priceRange === 'mid') rangeMult = 1.0;
+    if(state.priceRange === 'high') rangeMult = 1.45;
+
+    const base = Math.round(basePerDay * state.duration * state.people * stayMult * rangeMult);
+    // taxes and fees
+    const taxes = Math.round(base * 0.12); // 12% tax
+    const total = base + taxes;
+
+    calculatedPriceEl.textContent = `INR ${total.toLocaleString()}`;
+    // update summary placeholders
+    sumBaseCost.textContent = `INR ${base.toLocaleString()}`;
+    sumTaxes.textContent = `INR ${taxes.toLocaleString()}`;
+    sumTotal.textContent = `INR ${total.toLocaleString()}`;
+
+    payTotal.textContent = `INR ${total.toLocaleString()}`;
+    ovAmount.textContent = `INR ${total.toLocaleString()}`;
+
+    // update overview panel entries
+    ovLocation.textContent = state.location;
+    ovDuration.textContent = `${state.duration} Days`;
+    ovPeople.textContent = `${state.people}`;
+    ovStay.textContent = state.stay;
+    // set summary fields
+    sumTheme.textContent = state.theme;
+    sumLocation.textContent = state.location;
+    sumDuration.textContent = `${state.duration} Days`;
+    sumStay.textContent = state.stay;
+    sumPeople.textContent = `${state.people}`;
+    sumBaseCost.textContent = `INR ${base.toLocaleString()}`;
+    sumTaxes.textContent = `INR ${taxes.toLocaleString()}`;
+    sumTotal.textContent = `INR ${total.toLocaleString()}`;
+
+    payTotal.textContent = `INR ${total.toLocaleString()}`;
+    ovAmount.textContent = `INR ${total.toLocaleString()}`;
+  }
+
+  // move handlers
+  toStep2Btn.addEventListener('click', () => {
+    // capture selections into state
+    state.priceRange = priceRangeEl.value;
+    state.duration = parseInt(durationEl.value);
+    state.location = locationEl.value;
+    // reset dependent parts
+    populateStayOptions();
+    renderItinerary();
+    recalcPrice();
+    goToStep(1);
+  });
+
+  backTo1Btn.addEventListener('click', () => goToStep(0));
+
+  toStep3Btn.addEventListener('click', () => {
+    // ensure people count valid
+    state.people = parseInt(peopleCountEl.value) || 1;
+    state.stay = stayOptionEl.value;
+    recalcPrice();
+    goToStep(2);
+  });
+
+  backTo2Btn.addEventListener('click', () => goToStep(1));
+
+  toStep4Btn.addEventListener('click', () => {
+    // prepare payment screen values
+    // final recalculation for safety
+    recalcPrice();
+    ovLocation.textContent = state.location;
+    ovDuration.textContent = `${state.duration} Days`;
+    ovPeople.textContent = `${state.people}`;
+    ovStay.textContent = state.stay;
+    payTotal.textContent = calculatedPriceEl.textContent;
+    goToStep(3);
+  });
+
+  backTo3Btn.addEventListener('click', () => goToStep(2));
+
+  // payment mode selection
+  paymentModesEl.querySelectorAll('.pay-mode').forEach(modeEl=>{
+    modeEl.addEventListener('click', () => {
+      paymentModesEl.querySelectorAll('.pay-mode').forEach(m=>m.classList.remove('selected'));
+      modeEl.classList.add('selected');
+      state.payMode = modeEl.dataset.mode;
+    });
+  });
+
+  // confirm payment
+  confirmPayBtn.addEventListener('click', () => {
+    const name = payNameEl.value.trim();
+    const phone = payPhoneEl.value.trim();
+    const email = payEmailEl.value.trim();
+    if(!name || !phone || !email){
+      alert('Please enter name, phone, and email to proceed.');
+      return;
+    }
+
+    // simulate payment success
+    alert('Payment Successful. Your booking is confirmed. Redirecting to home page.');
+    // redirect to home
+    window.location.href = 'home.html';
+  });
+
+  // initial setup
+  (function init(){
+    // default selections
+    themeOptionsEl.querySelectorAll('.option-card').forEach(c => c.classList.toggle('selected', c.dataset.value===state.theme));
+    priceRangeEl.value = state.priceRange;
+    durationEl.value = state.duration;
+    locationEl.value = state.location;
+    populateStayOptions();
+    peopleCountEl.value = state.people;
+    renderItinerary();
+    recalcPrice();
+    goToStep(0);
+  })();
+
+  // small enhancement: keyboard support for option cards
+  themeOptionsEl.querySelectorAll('.option-card').forEach(c => {
+    c.setAttribute('tabindex','0');
+    c.addEventListener('keypress', (e) => { if(e.key === 'Enter' || e.key === ' ') c.click(); });
+  });
+</script>
+
+</body>
+</html>

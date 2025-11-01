@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pack and Plan - Dashboard</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    :root {
+      --primary: #F4B400;
+      --secondary: #FF8C42;
+      --accent: #FFF3B0;
+      --bg: #FFFAF0;
+      --text: #2F2F2F;
+      --radius: 16px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-space {
+      width: 65px;
+      height: 65px;
+    }
+
+    .logo-space img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #dbe9f5;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary);
+    }
+
+    /* FULL SCREEN IMAGE */
+    .hero-image {
+      position: relative;
+      height: calc(100vh - 160px);
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* LOGIN OVERLAY */
+    .login-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      padding: 2rem 3rem;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      width: 320px;
+      color: white;
+    }
+
+    .login-overlay h3 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .login-overlay input {
+      width: 100%;
+      margin-bottom: 0.4rem;
+      padding: 0.6rem;
+      border: none;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.8);
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .login-overlay input:focus {
+      outline: 2px solid var(--primary);
+    }
+
+    .error-text {
+      color: #ff4444;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      text-align: left;
+    }
+
+    .login-overlay button {
+      width: 100%;
+      padding: 0.7rem;
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius);
+      color: white;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .login-overlay button:hover {
+      background: var(--secondary);
+    }
+
+    .login-overlay p {
+      margin-top: 1rem;
+      color: white;
+    }
+
+    .login-overlay a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    footer {
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo-space">
+        <img src="logo1.jpeg" alt="Pack and Plan Logo">
+      </div>
+      <div>
+        <h1>Pack and Plan</h1>
+        <p>Pack Light, Plan Right</p>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard_before.html">Destinations</a></li>
+        <li><a href="dashboard_before.html">Packages</a></li>
+        <li><a href="dashboard_before.html">Dash-Board</a></li>
+      </ul> 
+    </nav>
+  </header>
+
+  <!-- SINGLE IMAGE SECTION -->
+  <div class="hero-image">
+    <img src="s-1.jpg" alt="Dashboard Background">
+
+    <!-- LOGIN OVERLAY -->
+    <div class="login-overlay">
+      <h3>Login</h3>
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Enter Email">
+        <div id="emailError" class="error-text"></div>
+
+        <input type="password" id="password" placeholder="Enter Password">
+        <div id="passwordError" class="error-text"></div>
+
+        <button type="submit">Login</button>
+        <p>Don't have an account?</p>
+        <p><a href="signup.html">Sign Up</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Pack and Plan | Explore. Experience. Enjoy.
+  </footer>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Dummy database
+    const dummyUser = {
+      email: "shirleychristy1310@gmail.com",
+      password: "shirley"
+    };
+
+    // Validation
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+      const emailError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+
+      let valid = true;
+
+      // Clear previous errors
+      emailError.textContent = "";
+      passwordError.textContent = "";
+      email.style.border = "";
+      password.style.border = "";
+
+      if (email.value.trim() === "") {
+        emailError.textContent = "Email cannot be empty!";
+        email.style.border = "2px solid red";
+        valid = false;
+      } 
+      else if (email.value.trim() !== dummyUser.email) {
+        emailError.textContent = "Invalid email!";
+        email.style.border = "2px solid red";
+        valid = false;
+      }
+
+      if (password.value.trim() === "") {
+        passwordError.textContent = "Password cannot be empty!";
+        password.style.border = "2px solid red";
+        valid = false;
+      } 
+      else if (password.value.trim() !== dummyUser.password) {
+        passwordError.textContent = "Incorrect password!";
+        password.style.border = "2px solid red";
+        valid = false;
+      }
+
+      if (valid) {
+        // Redirect to home.html
+        window.location.href = "home.html";
+      }
+    });
+  </script>
+
+</body>
+</html>

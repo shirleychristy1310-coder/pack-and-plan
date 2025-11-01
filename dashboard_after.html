@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Pack and Plan</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    :root {
+      --primary: #F4B400;   /* Golden Yellow */
+      --secondary: #FF8C42; /* Sunset Orange */
+      --accent: #FFF3B0;    /* Soft Cream Yellow */
+      --bg: #FFFAF0;        /* Light Ivory */
+      --text: #2F2F2F;      /* Charcoal Gray */
+      --radius: 16px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-space {
+      width: 65px;
+      height: 65px;
+    }
+
+    .logo-space img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #fefefe;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary);
+    }
+
+    /* MAIN DASHBOARD */
+    main {
+      padding: 3rem 5%;
+    }
+
+    .dashboard-title {
+      text-align: center;
+      font-weight: 700;
+      color: var(--secondary);
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .dashboard-section {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      padding: 2rem;
+      margin-bottom: 3rem;
+      transition: transform 0.3s ease;
+    }
+
+    .dashboard-section:hover {
+      transform: scale(1.02);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h4 {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* PROFILE */
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .profile-info img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--secondary);
+    }
+
+    .profile-details p {
+      margin: 0.3rem 0;
+    }
+
+    .profile-details strong {
+      color: var(--secondary);
+    }
+
+    /* SAVED TRIPS */
+    .trip-card {
+      background: var(--accent);
+      border-radius: var(--radius);
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .trip-card:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .trip-card img {
+      width: 120px;
+      height: 80px;
+      border-radius: var(--radius);
+      object-fit: cover;
+    }
+
+    /* PAST BOOKINGS */
+    .booking-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .booking-table th, .booking-table td {
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding: 0.8rem;
+      text-align: left;
+    }
+
+    .booking-table th {
+      color: var(--secondary);
+    }
+
+    .status {
+      padding: 0.3rem 0.8rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .completed { background: #c8f7c5; color: #256029; }
+    .upcoming { background: #fff3b0; color: #6b4500; }
+    .cancelled { background: #f7c5c5; color: #a00000; }
+
+    /* FOOTER */
+    footer {
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 2rem;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo-space">
+        <img src="logo1.jpeg" alt="Pack and Plan Logo">
+      </div>
+      <div>
+        <h1>Pack and Plan</h1>
+        <p>Pack Light, Plan Right</p>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="destination.html">Destinations</a></li>
+        <li><a href="package.html">Packages</a></li>
+        <li><a href="dashboard_after.html">Dash-Board</a></li>
+        <li><a href="index.html">log-out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN DASHBOARD -->
+  <main>
+    <h2 class="dashboard-title">Your Travel Dashboard</h2>
+
+    <!-- PROFILE SECTION -->
+    <section id="profile" class="dashboard-section">
+      <div class="section-header">
+        <h4>Profile</h4>
+      </div>
+      <div class="profile-info">
+        <img src="pro.jpg" alt="Profile Picture">
+        <div class="profile-details">
+          <p><strong>Name:</strong> Shirley Christy</p>
+          <p><strong>Email:</strong> shirleychristy1310@gmail.com</p>
+          <p><strong>Location:</strong> Chennai, India</p>
+          <p><strong>Member Since:</strong> March 2023</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAVED TRIPS SECTION -->
+    <section id="trips" class="dashboard-section">
+      <div class="section-header">
+        <h4>Saved Trips</h4>
+      </div>
+      <div class="trip-card">
+        <img src="c-7.jpg" alt="Jaipur">
+        <div>
+          <h5>Royal Jaipur Getaway</h5>
+          <p>Explore the Pink City's palaces and forts in a 3-day cultural escape.</p>
+        </div>
+      </div>
+      <div class="trip-card">
+        <img src="b-2.jpg" alt="Goa">
+        <div>
+          <h5>Sunset in Goa</h5>
+          <p>Relax by the beaches, enjoy seafood, and experience the nightlife.</p>
+        </div>
+      </div>
+      <div class="trip-card">
+        <img src="c-8.jp	g" alt="Darjeeling">
+        <div>
+          <h5>Tea Trails of Darjeeling</h5>
+          <p>A peaceful retreat amidst tea gardens and mountain views.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAST BOOKINGS SECTION -->
+    <section id="bookings" class="dashboard-section">
+      <div class="section-header">
+        <h4>Past Bookings</h4>
+      </div>
+      <table class="booking-table">
+        <thead>
+          <tr>
+            <th>Destination</th>
+            <th>Travel Date</th>
+            <th>Duration</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kerala Backwaters</td>
+            <td>June 2024</td>
+            <td>5 Days</td>
+            <td><span class="status completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>Manali Adventure</td>
+            <td>October 2024</td>
+            <td>4 Days</td>
+            <td><span class="status cancelled">Cancelled</span></td>
+          </tr>
+          <tr>
+            <td>Andaman Islands</td>
+            <td>December 2025</td>
+            <td>6 Days</td>
+            <td><span class="status upcoming">Upcoming</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Pack and Plan | Explore. Experience. Enjoy.
+  </footer>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
