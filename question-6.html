@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Computer History Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .instruction {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f2f2f2;
+            border-left: 5px solid #333;
+        }
+        .timer {
+            margin-top: 10px;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Computer History Timeline</h2>
+
+<p class="timer" id="timer">Time remaining: 90 seconds</p>
+
+<div class="content" id="content">
+<pre>
+1946 - ENIAC, the first general-purpose electronic computer
+ENIAC marks the birth of large-scale computing.
+
+1957 - FORTRAN programming language released
+FORTRAN becomes the first widely used high-level language.
+
+1969 - ARPANET launched
+ARPANET connects its first four nodes.
+
+1971 - Intel releases the first microprocessor (4004)
+The Intel 4004 becomes the first commercial microprocessor.
+
+1976 - Apple Computer founded
+Apple begins the personal computing revolution.
+
+1981 - IBM introduces the IBM Personal Computer
+The IBM PC becomes a global standard.
+
+1989 - World Wide Web proposed
+Web pages and hyperlinks are introduced.
+
+1991 - Linux kernel released
+Linux grows as a major open-source operating system.
+
+1995 - Java programming language released
+Java introduces platform independence.
+
+2001 - Wikipedia launched
+Wikipedia becomes a global knowledge platform.
+</pre>
+</div>
+
+<div class="instruction" id="instruction">
+    <h3>Instructions</h3>
+    <p>
+        You must answer 5 questions.<br>
+        At least 3 answers must be correct.<br><br>
+        If you qualify, the next location will be given by the person
+        who is asking the questions.
+    </p>
+</div>
+
+<script>
+let timeLeft = 90;
+let timerElement = document.getElementById("timer");
+let content = document.getElementById("content");
+let instruction = document.getElementById("instruction");
+
+let countdown = setInterval(function() {
+    timeLeft--;
+    timerElement.textContent = "Time remaining: " + timeLeft + " seconds";
+
+    if (timeLeft <= 0) {
+        clearInterval(countdown);
+        content.style.display = "none";
+        timerElement.style.display = "none";
+        instruction.style.display = "block";
+    }
+}, 1000);
+</script>
+
+</body>
+</html>
